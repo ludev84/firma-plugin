@@ -1,6 +1,6 @@
-const firmaInput = body.querySelector("#form-firma");
-const nombreInput = body.querySelector("#form-nombre");
-const fechaInput = body.querySelector("#form-fecha");
+// const firmaInput = body.querySelector("#form-firma");
+const nombreInput = body.querySelector("#nombre-completo");
+// const fechaInput = body.querySelector("#form-fecha");
 
 function doSomething() {
   let signatureData = signaturePad.toDataURL();
@@ -22,28 +22,113 @@ function registrar() {
   }
   else {
     if (document.getElementById('datos-preview').innerHTML.trim().length == 0) {
-      console.log("vacio");
+      // Pre visualizar imagen de firma
       let preview = document.getElementById('datos-preview');
       let signatureData = signaturePad.toDataURL();
       let img = document.createElement("img");
       img.setAttribute("src", signatureData);
       preview.append(img);
 
-      let nombre = document.getElementById("form-nombre").value;
+      // Pre visualizar nombre
+      let nombre = document.getElementById("nombre-completo").value;
       let p = document.createElement("p");
       p.textContent = "Nombre: " + nombre;
       preview.append(p);
+
+      // Crear formulario para pasar los datos por metodo post
+      let formulario = document.createElement("form");
+      let nombreInput = document.createElement("input");
+      let firmaInput = document.createElement("input");
+      let fechaInput = document.createElement("input");
+      let timeNow = new Date();
+      let botonConfirmar = document.createElement("button")
+
+      formulario.id = "formulario-datos-enviar";
+      formulario.action = "datos.php";
+      formulario.method = "post";
+
+      nombreInput.hidden = true;
+      nombreInput.type = "text";
+      nombreInput.name = "nombre";
+      nombreInput.id = "nombre-form";
+      nombreInput.value = nombre;
+
+      firmaInput.hidden = true;
+      firmaInput.type = "text";
+      firmaInput.name = "firma";
+      firmaInput.id = "firma-form";
+      firmaInput.value = signatureData.slice(22);
+
+      fechaInput.hidden = true;
+      fechaInput.type = "text";
+      fechaInput.name = "fecha";
+      fechaInput.id = "fecha-form";
+      fechaInput.value = timeNow;
+
+      botonConfirmar.onclick = "doSomething()";
+      botonConfirmar.type = "submit";
+      botonConfirmar.value = "submitButton";
+      botonConfirmar.innerHTML = "Registrar datos";
+      
+      preview.append(formulario);
+      formulario.append(nombreInput);
+      formulario.append(firmaInput);
+      formulario.append(fechaInput);
+      formulario.append(botonConfirmar);
     }
     else {
-      console.log("lleno");
+      console.log("Lleno");
       let preview = document.getElementById('datos-preview');
       let signatureData = signaturePad.toDataURL();
       let img = preview.querySelector("img");
-      let p = preview.querySelector("p")
       img.setAttribute("src", signatureData);
-
-      let nombre = document.getElementById("form-nombre").value;
+      
+      let p = preview.querySelector("p")
+      let nombre = document.getElementById("nombre-completo").value;
       p.textContent = "Nombre: " + nombre;
+
+      // Crear formulario para pasar los datos por metodo post
+      let formularioAnterior = document.getElementById("formulario-datos-enviar");
+      formularioAnterior.remove();
+      let formulario = document.createElement("form");
+      let nombreInput = document.createElement("input");
+      let firmaInput = document.createElement("input");
+      let fechaInput = document.createElement("input");
+      let timeNow = new Date();
+      let botonConfirmar = document.createElement("button")
+
+      formulario.id = "formulario-datos-enviar";
+      formulario.action = "datos.php";
+      formulario.method = "post";
+
+      nombreInput.hidden = true;
+      nombreInput.type = "text";
+      nombreInput.name = "nombre";
+      nombreInput.id = "nombre-form";
+      nombreInput.value = nombre;
+
+      firmaInput.hidden = true;
+      firmaInput.type = "text";
+      firmaInput.name = "firma";
+      firmaInput.id = "firma-form";
+      firmaInput.value = signatureData.slice(22);
+
+      fechaInput.hidden = true;
+      fechaInput.type = "text";
+      fechaInput.name = "fecha";
+      fechaInput.id = "fecha-form";
+      fechaInput.value = timeNow;
+
+      botonConfirmar.onclick = "doSomething()";
+      botonConfirmar.type = "submit";
+      botonConfirmar.value = "submitButton";
+      botonConfirmar.innerHTML = "Registrar datos";
+      
+      preview.append(formulario);
+      formulario.append(nombreInput);
+      formulario.append(firmaInput);
+      formulario.append(fechaInput);
+      formulario.append(botonConfirmar);
     };
   };
 };
