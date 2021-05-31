@@ -1,6 +1,7 @@
-var clearButton = document.querySelector("[data-action=clear]");
-var undoButton = document.querySelector("[data-action=undo]");
-var canvas = document.querySelector("canvas");
+const body = document.body;
+var clearButton = body.querySelector("[data-action=clear]");
+var undoButton = body.querySelector("[data-action=undo]");
+var canvas = body.querySelector("canvas");
 
 var signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
