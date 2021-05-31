@@ -1,0 +1,33 @@
+html {
+  background-color: #ac0f72;
+}
+
+#signature-pad {
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px 20px 20px;
+  /* background-color:rgb(255, 255, 255); */
+}
+
+canvas {
+  border:2px solid #000000b0;
+  background-color:rgb(255, 255, 255);
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#formulario {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  width: 600px;
+  margin: 20px auto;
+  background-color: #ff931e;
+  padding: 20px 20px 20px 20px;
+  border: 5px solid   rgba(0, 0, 0, 0.603);
+}

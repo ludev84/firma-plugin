@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="styles/style.css" rel="stylesheet">
+  <title>Firma</title>
+</head>
+<body>
+
+  <div id="signature-pad">
+    <canvas width="400" height="200"></canvas>
+  </div>
+
+  <div id="buttons">
+    <button type="button" data-action="clear">Limpiar</button>
+    <button type="button" data-action="undo">Deshacer</button>
+  </div>
+
+  <div id="formulario">
+    <form action="datos.php" method="post">
+      <input id="form-firma" hidden type="text" name="firma">
+      <input id="form-nombre" type="text" name="nombre" placeholder="Ingresar nombre">
+      <input id="form-fecha" hidden type="text" name="fecha">
+      <button onclick="doSomething()" type="submit" value="submitButton">Registrar firma</button>
+    </form>
+  </div>
+  
+
+  <script src="js/signature_pad.umd.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
