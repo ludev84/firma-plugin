@@ -11,6 +11,7 @@
     echo $_POST['firma'],'<br>';
     echo $_POST['nombre'],'<br>';
     echo $_POST['fecha'],'<br>';
+    echo $_POST['solicitudId'],'<br>';
   ?>
 
   <script>

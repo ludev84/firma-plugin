@@ -2,16 +2,16 @@
 const nombreInput = body.querySelector("#nombre-completo");
 // const fechaInput = body.querySelector("#form-fecha");
 
-function doSomething() {
-  let signatureData = signaturePad.toDataURL();
-  let timeNow = new Date();
+// function doSomething() {
+//   let signatureData = signaturePad.toDataURL();
+//   let timeNow = new Date();
 
-  // Acortar la url de la imagen de la firma para solo tener la parte despues de base64
-  let signatureDataBase64 = signatureData.slice(22);
+//   // Acortar la url de la imagen de la firma para solo tener la parte despues de base64
+//   let signatureDataBase64 = signatureData.slice(22);
 
-  firmaInput.setAttribute("value", signatureDataBase64);
-  fechaInput.setAttribute("value", timeNow)
-};
+//   firmaInput.setAttribute("value", signatureDataBase64);
+//   fechaInput.setAttribute("value", timeNow)
+// };
 
 function registrar() {
   if (signaturePad.isEmpty()) {
@@ -35,17 +35,19 @@ function registrar() {
       p.textContent = "Nombre: " + nombre;
       preview.append(p);
 
-      // Crear formulario para pasar los datos por metodo post
+      // Crear formulario oculto para pasar los datos por metodo post
       let formulario = document.createElement("form");
       let nombreInput = document.createElement("input");
       let firmaInput = document.createElement("input");
       let fechaInput = document.createElement("input");
+      let solicitudIdInput = document.createElement("input");
       let timeNow = new Date();
       let botonConfirmar = document.createElement("button")
 
       formulario.id = "formulario-datos-enviar";
-      formulario.action = "datos.php";
+      formulario.action = "../pdf/solicitudes_pdf.php";
       formulario.method = "post";
+      formulario.target = "_blank";
 
       nombreInput.hidden = true;
       nombreInput.type = "text";
@@ -65,15 +67,24 @@ function registrar() {
       fechaInput.id = "fecha-form";
       fechaInput.value = timeNow;
 
-      botonConfirmar.onclick = "doSomething()";
+      solicitudIdInput.hidden = true;
+      solicitudIdInput.type = "text";
+      solicitudIdInput.name = "solicitud_id";
+      solicitudIdInput.id = "solicitud-id-form";
+      // Obtener id de la solicitud desde la URL
+      let parameters = new URLSearchParams(window.location.search);
+      solicitudIdInput.value = +parameters.get("solicitud_id");
+
+      // botonConfirmar.onclick = "doSomething()";
       botonConfirmar.type = "submit";
       botonConfirmar.value = "submitButton";
-      botonConfirmar.innerHTML = "Registrar datos";
+      botonConfirmar.innerHTML = "Confirmar datos";
       
       preview.append(formulario);
       formulario.append(nombreInput);
       formulario.append(firmaInput);
       formulario.append(fechaInput);
+      formulario.append(solicitudIdInput);
       formulario.append(botonConfirmar);
     }
     else {
@@ -87,19 +98,21 @@ function registrar() {
       let nombre = document.getElementById("nombre-completo").value;
       p.textContent = "Nombre: " + nombre;
 
-      // Crear formulario para pasar los datos por metodo post
+      // Crear formulario oculto para pasar los datos por metodo post
       let formularioAnterior = document.getElementById("formulario-datos-enviar");
       formularioAnterior.remove();
       let formulario = document.createElement("form");
       let nombreInput = document.createElement("input");
       let firmaInput = document.createElement("input");
       let fechaInput = document.createElement("input");
+      let solicitudIdInput = document.createElement("input");
       let timeNow = new Date();
       let botonConfirmar = document.createElement("button")
 
       formulario.id = "formulario-datos-enviar";
-      formulario.action = "datos.php";
+      formulario.action = "../pdf/solicitudes_pdf.php";
       formulario.method = "post";
+      formulario.target = "_blank";
 
       nombreInput.hidden = true;
       nombreInput.type = "text";
@@ -119,16 +132,27 @@ function registrar() {
       fechaInput.id = "fecha-form";
       fechaInput.value = timeNow;
 
-      botonConfirmar.onclick = "doSomething()";
+      solicitudIdInput.hidden = true;
+      solicitudIdInput.type = "text";
+      solicitudIdInput.name = "solicitud_id";
+      solicitudIdInput.id = "solicitud-id-form";
+      // Obtener id de la solicitud desde la URL
+      let parameters = new URLSearchParams(window.location.search);
+      solicitudIdInput.value = +parameters.get("solicitud_id");
+
+      // botonConfirmar.onclick = "doSomething()";
       botonConfirmar.type = "submit";
       botonConfirmar.value = "submitButton";
-      botonConfirmar.innerHTML = "Registrar datos";
+      botonConfirmar.innerHTML = "Confirmar datos";
       
       preview.append(formulario);
       formulario.append(nombreInput);
       formulario.append(firmaInput);
       formulario.append(fechaInput);
+      formulario.append(solicitudIdInput);
       formulario.append(botonConfirmar);
     };
   };
 };
+
+console.log("act: 0");
